@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Page</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ url_for('static', filename='home.js' ) }}"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Poppins:wght@100&family=Quicksand:wght@300&display=swap" rel="stylesheet">
+
+  <style>
+    a {
+      color: inherit; /* Inherit the color from the parent element */
+      text-decoration: none; /* Remove underline */
+    }
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+    }
+    
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow-y: auto;
+      margin-top: 100px;
+    }
+    
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background-color: #ffffff;
+      border-radius: 4px;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 430px;
+      margin-bottom: 20px;
+    }
+    
+    .search-bar input[type="text"] {
+      border: none;
+      font-size: 16px;
+      width: 100%;
+      padding: 8px;
+      outline: none;
+    }
+    
+    .search-bar button {
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: background-color 0.15s, transform 0.15s;
+    }
+
+    .search-bar button:hover {
+        background-color: #3ca240;
+    }
+
+    .search-bar button:active {
+        transform: scale(0.93);
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px;
+      width: 2180px;
+      justify-content: center;
+    }
+
+    .row-item {
+      flex-basis: 30%;
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 480px;
+    }
+
+    .books-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin: 8px;
+    }
+
+    .books-container ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .books-container li {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+      background-color: white;
+      padding: 11px;
+      margin-bottom: 12px;
+      width: 680px;
+      border-radius: 7%;
+      height: 158px;
+    }
+
+    .note {
+      margin-top: 20px;
+      margin-bottom: 15px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-left: 10px;
+    }
+
+    .button-custom {
+      background-color: rgb(63, 219, 63);
+      font-size: 16px;
+      border: none;
+      height: 20px;
+      width: 20px;
+      margin-right: 5px;
+      color: whitesmoke;
+    }
+
+    .button-custom:hover {
+      background-color: #3ca240;
+      cursor: pointer;
+    }
+
+    .button-custom:active {
+        transform: scale(0.93);
+    }
+
+    #myListButton {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-top: 9px;
+      margin-right: 9px;
+    }
+
+    #myListButton:hover {
+      background-color: #3ca240;
+      cursor: pointer;
+    }
+
+    #myListButton:active {
+        transform: scale(0.93);
+    }
+    #loading-spinner-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 10vh; /* Set the container height to the full viewport height */
+    }
+
+    #loading-spinner {
+      border: 8px solid #f3f3f3; /* Light gray border */
+      border-top: 8px solid #34db60; /* Blue border on top */
+      border-radius: 50%; /* Rounded border */
+      width: 60px; /* Set the width and height */
+      height: 60px;
+      animation: spin 2s linear infinite; /* Apply rotation animation */
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); } /* Starting point of the animation */
+      100% { transform: rotate(360deg); } /* Ending point of the animation */
+    }
+  </style>
+</head>
+<body>
+  <button id="myListButton" onclick="goToListPage()">MyList</button>
+
+  <div class="container">
+    <div class="title">
+      <h3>Book Search and Recommendation System</h3>
+    </div>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search for a book...">
+        <button type="button" id="submitButton">Search</button>
+    </div>
+    
+  </div>
+  <div id="loading-spinner-container">
+    <div style="display: none" id="loading-spinner"></div>
+  </div>
+  <div class="books-container">
+    <ul id="list">
+
+    </ul>
+    <p class="note">Uses Goodreads Dataset.</p>
+  </div>
+</body>
+</html>

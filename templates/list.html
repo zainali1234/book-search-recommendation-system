@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Page</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ url_for('static', filename='rec.js') }}"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Poppins:wght@100&family=Quicksand:wght@300&display=swap" rel="stylesheet">
+
+  <style>
+    a {
+      color: inherit; /* Inherit the color from the parent element */
+      text-decoration: none; /* Remove underline */
+    }
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+    }
+    .pageButton {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-top: 9px;
+      margin-right: 9px;
+    }
+
+    .pageButton:hover {
+      background-color: #3ca240;
+      cursor: pointer;
+    }
+
+    .pageButton:active {
+        transform: scale(0.93);
+    }
+    .container {
+      display: flex;
+    }
+
+    .user-books-list,
+    .rec-books-list {
+      width: 50%;
+      height: 100vh; 
+    }
+
+    .user-books-list {
+      background-color: #f0f0f0; 
+    }
+
+    .rec-books-list {
+      border-left: 2px solid #000000; /* Set the border width and color */
+      padding-left: 10px;
+      background-color: #e0e0e0; 
+    }
+
+    #user-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    #user-list li {
+      background-color: white;
+      padding: 10px;
+      margin-bottom: 8px;
+      height: 30px;
+    }
+
+    #rec-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    #rec-list li {
+      background-color: rgb(157, 232, 120);
+      padding: 10px;
+      margin-bottom: 8px;
+      height: 30px;
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 6%;
+    }
+
+    #removeButton:hover, #getsRecsButton:hover {
+      cursor: pointer;
+    }
+
+    #removeButton:active, #getsRecsButton:active {
+        transform: scale(0.93);
+    }
+    #removeButton,
+    #getsRecsButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 6%;
+      margin: 0 auto; /* Add this line */
+    }
+
+    #loading-spinner-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 20vh; /* Set the container height to the full viewport height */
+    }
+
+    #loading-spinner {
+      border: 8px solid #f3f3f3; /* Light gray border */
+      border-top: 8px solid #34db60; /* Blue border on top */
+      border-radius: 50%; /* Rounded border */
+      width: 60px; /* Set the width and height */
+      height: 60px;
+      animation: spin 2s linear infinite; /* Apply rotation animation */
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); } /* Starting point of the animation */
+      100% { transform: rotate(360deg); } /* Ending point of the animation */
+    }
+  </style>
+</head>
+<body>
+  <button class="pageButton" id="homeButton" onclick="goToHomePage()">Home</button>
+  <div class="container">
+    <div class="user-books-list">
+      <h4 class="title">My List</h4>
+      <ul class="list" id="user-list">
+        
+      </ul>
+      <button id="removeButton">Remove Books</button>
+    </div>
+    <div class="rec-books-list">
+      <h4 class="title">Recommendation List</h4>
+      <ul class="list" id="rec-list">
+      
+      </ul>
+      <button id="getsRecsButton">Get Recommendations</button>
+      <div id="loading-spinner-container">
+        <div style="display: none" id="loading-spinner"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
