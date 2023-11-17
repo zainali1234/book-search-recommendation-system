@@ -1,5 +1,5 @@
 # Book Search Recommendation System
-Flask-based web app that allows users to search for books, and get recommendations for their liked books.
+Flask based web app that allows users to search for books, and get recommendations for their liked books.
 
 Warning: This repository contains large .pkl files used for storing the models and dataset information used for
 running the recommendation algorithm. Be cautious of this before cloning to your system. 
